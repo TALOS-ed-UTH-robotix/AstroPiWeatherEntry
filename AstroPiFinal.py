@@ -2,7 +2,7 @@
 """
 
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  +                                                                                                                      +   
+  +                                                                                                                      +
   +  Weather Comparison Project for the Astro Pi Competition                                                             +
   +                                                                                                                      +
   +  This has been written by Nicole Ashworth for the Astro Pi competition, 2015.                                        +
@@ -18,7 +18,7 @@
   +  Date   : 24/05/2015                                                                                                 +
   +                                                                                                                      +
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  
+
 """
 
 
@@ -79,7 +79,7 @@ def pickMessage(messages):
     num_messages = len(messages)
     num_picked = randint(0, num_messages - 1)
     message_picked = messages[num_picked]
-    return message_picked   
+    return message_picked
 
 
 #Greet Tim
@@ -108,7 +108,7 @@ with open('./heathrowWeather2014.tsv') as csvfile:
         avTempArr.append(row[tempColumn])
         avRainArr.append(row[rainColumn])
         avCloudArr.append(row[rainColumn])
-        
+
 
 #read data
 for chosen in dayArr:
@@ -117,8 +117,8 @@ for chosen in dayArr:
         avRain = round(float(avRainArr[find_match]),1)
         avCloud = round(float(avCloudArr[find_match]), 1)
         break
-    find_match = find_match + 1 #add one so it checks the next row 
-    
+    find_match = find_match + 1 #add one so it checks the next row
+
 
 #print temp data
 tempDiff = round(StationTemp - avTemp,1)
@@ -130,7 +130,7 @@ else:
 ap.clear()
 
 
-#compare the values and set the icon 
+#compare the values and set the icon
 if avRain < NoRain: #if there is no rain
     if avCloud < valueSun: #if it is sunny
         iconFileName = sunPng
@@ -142,14 +142,14 @@ elif avRain <= LightRain: #if there is light rain
     iconFileName = lightRainPng
 else:       #otherwise it is heavy rain
     iconFileName = heavyRainPng
-    
+
 
 iconFileName= pngPath + iconFileName #add the correct icon file name onto the path to the icons folder
 
 
 #display end icon
 ap.show_message("Likely weather") #display the words 'Likely weather'
-ap.load_image(iconFileName) #display the icon image 
+ap.load_image(iconFileName) #display the icon image
 sleep(2) #keep displaying the image for 2 seconds
 
 
