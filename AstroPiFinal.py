@@ -25,7 +25,7 @@
 #import everything needed
 import csv                      #this is to read the delimited file
 import datetime                 #this is to use the correct date in the comparison from the file to ISS
-from astro_pi import AstroPi    #this is to be able to use the sensors and board on the Astro Pi
+from sense_hat import SenseHat    #this is to be able to use the sensors and board on the Astro Pi
 from time import sleep, time    #this is to be able to make the code wait when it is needed to
 from random import randint      #this is to be able to generate a random greeting/goodbye from the list
 
@@ -48,8 +48,8 @@ avRainArr = [] #the array to put the rainfall data into
 avCloudArr = [] #the array to put the cloud cover data into
 
 
-#initiate AstroPi
-ap = AstroPi()
+#initiate SenseHat
+sense = SenseHat()
 
 
 #filenames
@@ -83,7 +83,7 @@ def pickMessage(messages):
 
 
 #Greet Tim
-ap.show_message(pickMessage(greetings)) #display a random greeting
+sense.show_message(pickMessage(greetings)) #display a random greeting
 
 
 #set up date/time
@@ -122,12 +122,12 @@ for chosen in dayArr:
 
 #print temp data
 tempDiff = round(StationTemp - avTemp,1)
-ap.show_message("The likely UK temp is %sC" % avTemp)
+sense.show_message("The likely UK temp is %sC" % avTemp)
 if tempDiff < 0:
-    ap.show_message("ISS is %sC colder" % tempDiff,text_colour=[0, 0, 255]) #display the difference in blue if ISS is colder
+    sense.show_message("ISS is %sC colder" % tempDiff,text_colour=[0, 0, 255]) #display the difference in blue if ISS is colder
 else:
-    ap.show_message("ISS is %sC warmer" % tempDiff,text_colour=[255, 0, 0]) #display the difference in red if ISS is warmer
-ap.clear()
+    sense.show_message("ISS is %sC warmer" % tempDiff,text_colour=[255, 0, 0]) #display the difference in red if ISS is warmer
+sense.clear()
 
 
 #compare the values and set the icon
@@ -148,10 +148,10 @@ iconFileName= pngPath + iconFileName #add the correct icon file name onto the pa
 
 
 #display end icon
-ap.show_message("Likely weather") #display the words 'Likely weather'
-ap.load_image(iconFileName) #display the icon image
+sense.show_message("Likely weather") #display the words 'Likely weather'
+sense.load_image(iconFileName) #display the icon image
 sleep(2) #keep displaying the image for 2 seconds
 
 
 #say goodbye
-ap.show_message(pickMessage(goodbyes)) #display a random goodbye message
+sense.show_message(pickMessage(goodbyes)) #display a random goodbye message
